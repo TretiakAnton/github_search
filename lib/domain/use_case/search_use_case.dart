@@ -1,0 +1,34 @@
+import 'package:github_search/data/repository/login_repository.dart';
+import 'package:github_search/domain/model/search_repo_model.dart';
+import 'package:github_search/domain/translator/weather_translator.dart';
+import 'package:github_search/presentation/state_management/login_bloc/search_cubit.dart';
+
+class SearchUseCase {
+  final SearchRepository _repository = SearchRepository();
+  final SearchTranslator _translator = SearchTranslator();
+  List<SearchRepoModel> _searchResult = [];
+  List<SearchRepoModel> _lastSearch = [];
+
+  List<SearchRepoModel> get searchResult => _searchResult;
+
+  List<SearchRepoModel> get lastSearch => _lastSearch;
+
+  Future<SearchState> search(String word) async {
+    SearchState result = SearchInitial();
+    final request = _translator.createSearchRequest(word);
+    final response = await _repository.search(request);
+    await response.fold(
+      (l) async => result = SearchFailed(l.toString()),
+      (r) async {
+        _searchResult = _translator.searchRepoModelFromEntity(r);
+        await _repository.saveLastSearch(_searchResult);
+        return result = SearchCompleted();
+      },
+    );
+    return result;
+  }
+
+  void getLastSearch() {
+    _lastSearch = _repository.getLastSearch();
+  }
+}
