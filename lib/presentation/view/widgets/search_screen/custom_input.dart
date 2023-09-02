@@ -1,13 +1,7 @@
-/*import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:github_search/core/constants.dart';
-import 'package:github_search/generated/assets.gen.dart';
-import 'package:github_search/presentation/state_management/login_bloc/search_cubit.dart';*/
-part of '../screens/search_screen.dart';
+part of '../../screens/search_screen.dart';
 
-class InputField extends StatelessWidget {
-  const InputField({Key? key}) : super(key: key);
+class CustomInput extends StatelessWidget {
+  const CustomInput({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

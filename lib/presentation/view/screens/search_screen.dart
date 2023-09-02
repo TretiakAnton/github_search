@@ -7,8 +7,9 @@ import 'package:github_search/generated/assets.gen.dart';
 import 'package:github_search/presentation/state_management/login_bloc/search_cubit.dart';
 import 'package:github_search/presentation/view/widgets/search_result_widget.dart';
 
-part '../widgets/search_screen/input_field.dart';
-part '../widgets/search_screen/search_screen_app_bar.dart.dart';
+part '../widgets/search_screen/custom_input.dart';
+
+part '../widgets/search_screen/search_app_bar.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class SearchScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const InputField(),
+                const CustomInput(),
                 BlocBuilder<SearchCubit, SearchState>(
                   builder: (context, state) {
                     if (state is SearchInitial || state is SearchInProgress) {

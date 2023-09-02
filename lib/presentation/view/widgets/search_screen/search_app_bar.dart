@@ -1,8 +1,4 @@
-part of '../screens/search_screen.dart';
-/*import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:github_search/core/constants.dart';
-import 'package:github_search/generated/assets.gen.dart';*/
+part of '../../screens/search_screen.dart';
 
 class SearchScreenAppBar extends StatelessWidget with PreferredSizeWidget {
   const SearchScreenAppBar({Key? key}) : super(key: key);
