@@ -17,36 +17,58 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<SearchCubit>();
-
     return SafeArea(
       child: Scaffold(
         appBar: const SearchScreenAppBar(),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 24,
-              horizontal: 16,
-            ),
-            child: Column(
-              children: [
-                const CustomInput(),
-                BlocBuilder<SearchCubit, SearchState>(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 24,
+            horizontal: 16,
+          ),
+          child: Column(
+            children: [
+              const CustomInput(),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: BlocBuilder<SearchCubit, SearchState>(
+                      builder: (context, state) {
+                        return Text(
+                          bloc.searchMade ? 'What we found' : 'Search history',
+                          style: SearchTextStyles.header
+                              .copyWith(color: SearchColors.accentPrimary),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Flexible(
+                child: BlocBuilder<SearchCubit, SearchState>(
                   builder: (context, state) {
-                    if (state is SearchInitial || state is SearchInProgress) {
-                      if (state is SearchInitial) {
-                        bloc.getLastSearch();
-                      }
-                      return const Center(
+                    if (state is SearchInProgress) {
+                      return const Padding(
+                        padding: EdgeInsets.only(
+                          top: 24,
+                        ),
                         child: CupertinoActivityIndicator(),
                       );
                     } else {
-                      return bloc.searchResult.isNotEmpty &&
-                              bloc.lastSearch.isNotEmpty
+                      return bloc.elements.isNotEmpty
                           ? ListView.builder(
-                              itemCount: bloc.searchResult.length,
+                              shrinkWrap: true,
+                              itemCount: bloc.elements.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return SearchResultWidget(
-                                  model: bloc.searchResult[index],
+                                  model: bloc.elements[index],
+                                  onTap: (bool isSelected) {
+                                    if (isSelected) {
+                                      bloc.addSelected(bloc.elements[index]);
+                                    } else {
+                                      bloc.removeSelected(bloc.elements[index]);
+                                    }
+                                  },
                                 );
                               },
                             )
@@ -62,9 +84,9 @@ class SearchScreen extends StatelessWidget {
                             );
                     }
                   },
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
       ),

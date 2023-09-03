@@ -52,7 +52,10 @@ class CustomInput extends StatelessWidget {
                 right: 10,
               ),
               child: InkWell(
-                onTap: () => bloc.search(controller.text),
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  bloc.search(controller.text);
+                },
                 child: SvgPicture.asset(
                   Assets.svg.searchInputIcon.path,
                 ),

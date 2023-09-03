@@ -20,7 +20,7 @@ class BoxManager {
   }
 
   List<SearchRepoModel>? getLastSearch() {
-    return _searchesBox.get(_KeyManager.lastSearchKey);
+    return _searchesBox.get(_KeyManager.lastSearchKey)?.cast<SearchRepoModel>();
   }
 
   Future<void> saveFavouritesSearch(List<SearchRepoModel> model) async {
@@ -28,7 +28,44 @@ class BoxManager {
   }
 
   List<SearchRepoModel>? getFavouritesSearch() {
-    return _searchesBox.get(_KeyManager.favouriteSearchKey);
+    return _searchesBox
+        .get(_KeyManager.favouriteSearchKey)
+        ?.cast<SearchRepoModel>();
+  }
+
+  Future addSelected(SearchRepoModel model) async {
+    List<SearchRepoModel> favourites = _searchesBox
+            .get(_KeyManager.favouriteSearchKey)
+            ?.cast<SearchRepoModel>() ??
+        [];
+    favourites.add(model);
+    await _searchesBox.put(_KeyManager.favouriteSearchKey, favourites);
+    List<SearchRepoModel> lastSearch =
+        _searchesBox.get(_KeyManager.lastSearchKey)?.cast<SearchRepoModel>() ??
+            [];
+    lastSearch.removeWhere((element) => element.id == model.id);
+    SearchRepoModel selected = model.copyWith(isSelected: true);
+    lastSearch.add(selected);
+    return await _searchesBox.put(_KeyManager.lastSearchKey, lastSearch);
+  }
+
+  Future removeSelected(SearchRepoModel model) async {
+    List<SearchRepoModel> favourites = _searchesBox
+            .get(_KeyManager.favouriteSearchKey)
+            ?.cast<SearchRepoModel>() ??
+        [];
+    favourites.removeWhere((element) => element.id == model.id);
+    await _searchesBox.put(_KeyManager.favouriteSearchKey, favourites);
+    List<SearchRepoModel> lastSearch =
+        _searchesBox.get(_KeyManager.lastSearchKey)?.cast<SearchRepoModel>() ??
+            [];
+    SearchRepoModel? unselected;
+    if (lastSearch.contains(model)) {
+      unselected = model.copyWith(isSelected: false);
+      lastSearch.removeWhere((element) => element.id == model.id);
+      lastSearch.add(unselected);
+    }
+    return await _searchesBox.put(_KeyManager.lastSearchKey, lastSearch);
   }
 }
 

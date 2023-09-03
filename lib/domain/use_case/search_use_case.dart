@@ -7,11 +7,10 @@ class SearchUseCase {
   final SearchRepository _repository = SearchRepository();
   final SearchTranslator _translator = SearchTranslator();
   List<SearchRepoModel> _searchResult = [];
-  List<SearchRepoModel> _lastSearch = [];
 
   List<SearchRepoModel> get searchResult => _searchResult;
 
-  List<SearchRepoModel> get lastSearch => _lastSearch;
+  List<SearchRepoModel> get lastSearch => _repository.getLastSearch();
 
   Future<SearchState> search(String word) async {
     SearchState result = SearchInitial();
@@ -28,7 +27,11 @@ class SearchUseCase {
     return result;
   }
 
-  void getLastSearch() {
-    _lastSearch = _repository.getLastSearch();
+  Future addSelected(SearchRepoModel model) async {
+    return await _repository.addSelected(model);
+  }
+
+  Future removeSelected(SearchRepoModel model) async {
+    return await _repository.removeSelected(model);
   }
 }

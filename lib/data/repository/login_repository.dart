@@ -24,4 +24,12 @@ class SearchRepository {
   List<SearchRepoModel> getLastSearch() {
     return _source.getLastSearch();
   }
+
+  Future addSelected(SearchRepoModel model) async {
+    return await _source.addSelected(model);
+  }
+
+  Future removeSelected(SearchRepoModel model) async {
+    return await _source.removeSelected(model);
+  }
 }

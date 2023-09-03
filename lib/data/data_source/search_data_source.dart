@@ -27,4 +27,12 @@ class SearchDataSource with RestLoggy {
   List<SearchRepoModel> getLastSearch() {
     return _boxManager.getLastSearch() ?? [];
   }
+
+  Future addSelected(SearchRepoModel model) async {
+    return await _boxManager.addSelected(model);
+  }
+
+  Future removeSelected(SearchRepoModel model) async {
+    return await _boxManager.removeSelected(model);
+  }
 }

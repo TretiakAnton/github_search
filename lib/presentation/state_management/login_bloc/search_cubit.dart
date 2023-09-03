@@ -18,9 +18,8 @@ class SearchCubit extends Cubit<SearchState> {
 
   bool get searchMade => _searchMade;
 
-  List<SearchRepoModel> get searchResult => _useCase.searchResult;
-
-  List<SearchRepoModel> get lastSearch => _useCase.lastSearch;
+  List<SearchRepoModel> get elements =>
+      _searchMade ? _useCase.searchResult : _useCase.lastSearch;
 
   set focused(bool value) {
     _focused = value;
@@ -52,7 +51,11 @@ class SearchCubit extends Cubit<SearchState> {
     return;
   }
 
-  void getLastSearch() {
-    return _useCase.getLastSearch();
+  Future addSelected(SearchRepoModel model) async {
+    return await _useCase.addSelected(model);
+  }
+
+  Future removeSelected(SearchRepoModel model) async {
+    return await _useCase.removeSelected(model);
   }
 }

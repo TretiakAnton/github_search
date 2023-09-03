@@ -14,6 +14,6 @@ class SearchTranslator {
         result.add(SearchRepoModel(id: entity.id!.toInt(), name: entity.name!));
       }
     }
-    return result;
+    return result.take(15).toList();
   }
 }
