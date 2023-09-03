@@ -38,7 +38,7 @@ class BoxManager {
             .get(_KeyManager.favouriteSearchKey)
             ?.cast<SearchRepoModel>() ??
         [];
-    favourites.add(model);
+    favourites.add(model.copyWith(isSelected: true));
     await _searchesBox.put(_KeyManager.favouriteSearchKey, favourites);
     List<SearchRepoModel> lastSearch =
         _searchesBox.get(_KeyManager.lastSearchKey)?.cast<SearchRepoModel>() ??

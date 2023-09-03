@@ -25,6 +25,10 @@ class SearchRepository {
     return _source.getLastSearch();
   }
 
+  List<SearchRepoModel> getFavourites() {
+    return _source.getFavourites();
+  }
+
   Future addSelected(SearchRepoModel model) async {
     return await _source.addSelected(model);
   }

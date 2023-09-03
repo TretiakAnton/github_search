@@ -1,7 +1,7 @@
-part of '../../screens/search_screen.dart';
+part of '../../screens/favourite_screen.dart';
 
-class SearchScreenAppBar extends StatelessWidget with PreferredSizeWidget {
-  const SearchScreenAppBar({Key? key}) : super(key: key);
+class FavouriteScreenAppBar extends StatelessWidget with PreferredSizeWidget {
+  const FavouriteScreenAppBar({Key? key}) : super(key: key);
   final double height = 65;
 
   @override
@@ -19,8 +19,15 @@ class SearchScreenAppBar extends StatelessWidget with PreferredSizeWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         children: [
-          const SizedBox(
-            width: 44,
+          GestureDetector(
+            onTap: () {
+              context.router.replaceNamed(Routes.searchScreen);
+            },
+            child: SvgPicture.asset(
+              Assets.svg.backIcon.path,
+              height: 44,
+              width: 44,
+            ),
           ),
           const Spacer(),
           Text(
@@ -28,15 +35,8 @@ class SearchScreenAppBar extends StatelessWidget with PreferredSizeWidget {
             style: SearchTextStyles.header,
           ),
           const Spacer(),
-          GestureDetector(
-            onTap: () {
-              context.router.replaceNamed(Routes.favouriteScreen);
-            },
-            child: SvgPicture.asset(
-              Assets.svg.favouriteIcon.path,
-              height: 44,
-              width: 44,
-            ),
+          const SizedBox(
+            width: 44,
           ),
         ],
       ),

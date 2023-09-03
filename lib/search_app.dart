@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_search/core/routing/app_router.dart';
-
-import 'presentation/state_management/login_bloc/search_cubit.dart';
-import 'presentation/state_management/weather_bloc/weather_cubit.dart';
+import 'package:github_search/presentation/state_management/favourite_bloc/favourite_cubit.dart';
+import 'package:github_search/presentation/state_management/search_bloc/search_cubit.dart';
 
 class SearchApp extends StatefulWidget {
   const SearchApp({Key? key}) : super(key: key);

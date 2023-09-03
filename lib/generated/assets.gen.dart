@@ -14,6 +14,9 @@ import 'package:flutter/services.dart';
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/back_icon.svg
+  SvgGenImage get backIcon => const SvgGenImage('assets/svg/back_icon.svg');
+
   /// File path: assets/svg/close_icon.svg
   SvgGenImage get closeIcon => const SvgGenImage('assets/svg/close_icon.svg');
 
@@ -35,6 +38,7 @@ class $AssetsSvgGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+        backIcon,
         closeIcon,
         favouriteIcon,
         favouriteSelectedIcon,

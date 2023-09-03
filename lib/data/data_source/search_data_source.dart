@@ -35,4 +35,8 @@ class SearchDataSource with RestLoggy {
   Future removeSelected(SearchRepoModel model) async {
     return await _boxManager.removeSelected(model);
   }
+
+  List<SearchRepoModel> getFavourites() {
+    return _boxManager.getFavouritesSearch() ?? [];
+  }
 }

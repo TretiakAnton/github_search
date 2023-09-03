@@ -52,8 +52,9 @@ class CustomInput extends StatelessWidget {
                 right: 10,
               ),
               child: InkWell(
-                onTap: () {
+                onTap: () async {
                   FocusScope.of(context).unfocus();
+                  await Future.delayed(const Duration(milliseconds: 100));
                   bloc.search(controller.text);
                 },
                 child: SvgPicture.asset(

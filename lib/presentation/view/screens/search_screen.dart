@@ -1,10 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:github_search/core/constants.dart';
+import 'package:github_search/core/routing/routes.dart';
 import 'package:github_search/generated/assets.gen.dart';
-import 'package:github_search/presentation/state_management/login_bloc/search_cubit.dart';
+import 'package:github_search/presentation/state_management/search_bloc/search_cubit.dart';
 import 'package:github_search/presentation/view/widgets/search_result_widget.dart';
 
 part '../widgets/search_screen/custom_input.dart';
@@ -77,6 +79,7 @@ class SearchScreen extends StatelessWidget {
                                 bloc.searchMade
                                     ? 'Nothing was find for your search.\nPlease check the spelling'
                                     : 'You have empty history.\nClick on search to start journey!',
+                                textAlign: TextAlign.center,
                                 style: SearchTextStyles.body.copyWith(
                                   color: SearchColors.textPlaceholder,
                                 ),

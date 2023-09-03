@@ -1,7 +1,7 @@
-import 'package:github_search/data/repository/login_repository.dart';
+import 'package:github_search/data/repository/search_repository.dart';
 import 'package:github_search/domain/model/search_repo_model.dart';
-import 'package:github_search/domain/translator/weather_translator.dart';
-import 'package:github_search/presentation/state_management/login_bloc/search_cubit.dart';
+import 'package:github_search/domain/translator/search_translator.dart';
+import 'package:github_search/presentation/state_management/search_bloc/search_cubit.dart';
 
 class SearchUseCase {
   final SearchRepository _repository = SearchRepository();
